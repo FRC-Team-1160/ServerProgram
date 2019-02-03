@@ -20,7 +20,7 @@ void setup() {
   botAngle = 0;
 
   frameRate(60);
-  s = new Server(this, 12345);  // Start a simple server on a port
+  s = new Server(this, 12345);  // 12345 is an example, port UDP/TCP 5800-5810 for "team use"
 } 
 
 void draw() {
