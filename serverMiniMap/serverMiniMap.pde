@@ -39,8 +39,8 @@ void draw() {
     data = int(split(input, ' '));  // split values into an array
     // draw line using received coords
     
-    botX = data[0];
-    botY = data[1];
+    botX += data[0];
+    botY += data[1];
     botAngle = data[2];
     
   }
