@@ -2,7 +2,9 @@ package clientTesting;
 // A Java program for a Client 
 import java.net.*;
 import java.util.Timer;
-import java.io.*; 
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
   
 public class Client 
 { 
@@ -55,12 +57,29 @@ public class Client
     public static void main(String args[]) throws IOException 
     { 
         //Client client = new Client("127.0.0.1", 12345); 
+
+        //Create text file to represent all the errors that occur during this run of the program. Includes date, time, and name
+        String fileName = "errors.txt";
+        File errors = new File(fileName);
+        FileWriter errorWriter = new FileWriter(fileName, true);
+        BufferedWriter errorBuffered =  new BufferedWriter(errorWriter);
+        PrintWriter errorPrinter = new PrintWriter(errorBuffered);
+
+        //Write current date and time to the file. 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        errorPrinter.println(dateFormat.format(date) + "\n\n");
+
+        
         Socket socket = null; 
         DataOutputStream out = null; 
+        String IP = "127.0.0.1";
+        int port = 12345;
+
         // establish a connection 
         try
         { 
-            socket = new Socket("127.0.0.1", 12345); 
+            socket = new Socket(IP, port); 
             System.out.println("Connected"); 
             
             // sends output to the socket 
@@ -69,10 +88,12 @@ public class Client
         catch(UnknownHostException u) 
         { 
             System.out.println(u); 
+            errorPrinter.println("Tried to create socket object and sent data output stream to it, UnknownHostException occurred.");
         } 
         catch(IOException i) 
         { 
             System.out.println(i); 
+            errorPrinter.println("Tried to create socket object and send data output stream to it, IOException occurred.");
         }
         
         int j = 0;
@@ -97,7 +118,15 @@ public class Client
         } 
         catch(IOException i) 
         { 
-            System.out.println(i); 
+            System.err.println(i); 
+            errorPrinter.println("Tried to close the data output stream and socket, IOException occurred");
         } 
+
+        //Close the PrintWrite Object
+        errorPrinter.close();
+
+        //write the messages to a single text file. 
+        
+        
     } 
 } 
