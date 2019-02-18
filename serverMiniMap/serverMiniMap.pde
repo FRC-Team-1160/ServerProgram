@@ -11,7 +11,7 @@ float actualFieldWidth = 324, actualFieldHeight = 324;
 float actualRobotWidth = 28.5, actualRobotHeight = 30.5;
 
 void setup() { 
-  bg = loadImage("C:\\Users\\jeffz\\Downloads\\map2.png");
+  bg = loadImage("..\\map2.png");
   size(736, 736);
   rectMode(CENTER);
   
